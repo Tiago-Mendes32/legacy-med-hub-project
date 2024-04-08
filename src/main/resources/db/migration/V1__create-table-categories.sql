@@ -1,0 +1,6 @@
+CREATE TABLE categories (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    code VARCHAR(20) NOT NULL UNIQUE,
+    PRIMARY KEY (id)
+);

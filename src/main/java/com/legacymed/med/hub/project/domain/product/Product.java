@@ -3,15 +3,18 @@ package com.legacymed.med.hub.project.domain.product;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.legacymed.med.hub.project.domain.category.Category;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity(name = "user")
 @Table(name = "users")
-public class Products implements Serializable{
+public class Product implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -22,14 +25,18 @@ public class Products implements Serializable{
 	private Integer quantity;
 	private Long ean;
 	
-	public Products() {
+	@ManyToOne
+	private Category category;
+	
+	public Product() {
 	}
 
-	public Products(String code, Double price, Integer quantity, Long ean) {
+	public Product(String code, Double price, Integer quantity, Long ean, Category category) {
 		this.code = code;
 		this.price = price;
 		this.quantity = quantity;
 		this.ean = ean;
+		this.category = category;
 	}
 
 	public Long getId() {
@@ -68,10 +75,19 @@ public class Products implements Serializable{
 		return ean;
 	}
 
+	
 	public void setEan(Long ean) {
 		this.ean = ean;
 	}
 
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -85,7 +101,7 @@ public class Products implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Products other = (Products) obj;
+		Product other = (Product) obj;
 		return Objects.equals(id, other.id);
 	}
 }
