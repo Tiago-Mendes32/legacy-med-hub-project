@@ -11,18 +11,20 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.legacymed.med.hub.project.entities.product.Product;
 import com.legacymed.med.hub.project.entities.product.DTO.NewProductDTO;
 import com.legacymed.med.hub.project.entities.product.DTO.ProductDetailsDTO;
-import com.legacymed.med.hub.project.repositories.ProductRepository;
+import com.legacymed.med.hub.project.services.ProductService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/products")
-public class productController {
+public class ProductController {
 
 	@Autowired
-	ProductRepository repository;
+	ProductService service;
 	
 	@PostMapping
-	public ResponseEntity<ProductDetailsDTO> insertProduct(@RequestBody NewProductDTO productDTO, UriComponentsBuilder uriBuilder) {
-		Product product = repository.save(new Product(productDTO));
+	public ResponseEntity<ProductDetailsDTO> insertProduct(@RequestBody @Valid NewProductDTO productDTO, UriComponentsBuilder uriBuilder) {
+		Product product = service.insertProduct(new Product(productDTO));
 		var uri = uriBuilder.path("/products/{id}").buildAndExpand(product.getId()).toUri();
 		return ResponseEntity.created(uri).body(new ProductDetailsDTO(product));
 	}
