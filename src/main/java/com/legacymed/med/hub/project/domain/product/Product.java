@@ -20,6 +20,7 @@ public class Product implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String name;
 	private String code;
 	private Double price;
 	private Integer quantity;
@@ -31,7 +32,8 @@ public class Product implements Serializable{
 	public Product() {
 	}
 
-	public Product(String code, Double price, Integer quantity, Long ean, Category category) {
+	public Product(String name, String code, Double price, Integer quantity, Long ean, Category category) {
+		this.setName(name);
 		this.code = code;
 		this.price = price;
 		this.quantity = quantity;
@@ -45,6 +47,14 @@ public class Product implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public String getCode() {
