@@ -15,7 +15,6 @@ public record NewProductDTO(
 		Double price,
 		@NotBlank
 		Integer quantity,
-		@Valid
 		Category category,
 		@Pattern(regexp = "\\d{13}")
 		Long ean
