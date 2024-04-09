@@ -1,10 +1,10 @@
-package com.legacymed.med.hub.project.domain.category;
+package com.legacymed.med.hub.project.entities.category;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import com.legacymed.med.hub.project.domain.product.Product;
+import com.legacymed.med.hub.project.entities.product.Product;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

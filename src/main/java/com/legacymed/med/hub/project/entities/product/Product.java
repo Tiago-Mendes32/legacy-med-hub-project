@@ -1,9 +1,10 @@
-package com.legacymed.med.hub.project.domain.product;
+package com.legacymed.med.hub.project.entities.product;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-import com.legacymed.med.hub.project.domain.category.Category;
+import com.legacymed.med.hub.project.entities.category.Category;
+import com.legacymed.med.hub.project.entities.product.DTO.NewProductDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,8 +13,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-@Entity(name = "user")
-@Table(name = "users")
+@Entity(name = "product")
+@Table(name = "products")
 public class Product implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -33,12 +34,21 @@ public class Product implements Serializable{
 	}
 
 	public Product(String name, String code, Double price, Integer quantity, Long ean, Category category) {
-		this.setName(name);
+		this.name = name;
 		this.code = code;
 		this.price = price;
 		this.quantity = quantity;
 		this.ean = ean;
 		this.category = category;
+	}
+	
+	public Product(NewProductDTO prodDTO) {
+		this.name = prodDTO.name();
+		this.code = prodDTO.code();
+		this.price = prodDTO.price();
+		this.quantity = prodDTO.quantity();
+		this.ean = prodDTO.ean();
+		this.category = prodDTO.category();
 	}
 
 	public Long getId() {
