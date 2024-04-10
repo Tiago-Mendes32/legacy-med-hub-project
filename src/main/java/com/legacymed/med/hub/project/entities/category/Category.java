@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.legacymed.med.hub.project.entities.product.Product;
+import com.legacymed.med.hub.project.entities.status.Status;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,8 +25,11 @@ public class Category implements Serializable{
 	private String name;
 	private String code;
 	
+	
 	@OneToMany(mappedBy = "category")
     private List<Product> products;
+	
+	private Status status;
 	
 	public Category() {
 	}
@@ -33,6 +37,7 @@ public class Category implements Serializable{
 	public Category(String name, String code) {
 		this.name = name;
 		this.code = code;
+		this.status = Status.Active;
 	}
 
 	public Long getId() {
@@ -57,6 +62,22 @@ public class Category implements Serializable{
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	@Override

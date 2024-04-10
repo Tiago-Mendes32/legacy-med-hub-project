@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.legacymed.med.hub.project.entities.product.Product;
@@ -50,12 +53,14 @@ public class ProductService {
 		return prodUpdated;
 	}
 
-	public Object listAllAssets() {
-		List<Product> list = repository.findAll();
-		List<Product> listAssets = new ArrayList<>();
-		for(Product x : list) {
-			if(x.getStatus() == Status.Active) {listAssets.add(x);}
-		}
-		return null;
+	public Page<Product> listAllAssets(Pageable pagination) {
+	    Page<Product> page = repository.findAll(pagination);
+	    List<Product> listAssets = new ArrayList<>();
+	    for (Product x : page.getContent()) {
+	        if (x.getStatus() == Status.Active) {
+	            listAssets.add(x);
+	        }
+	    }
+	    return new PageImpl<>(listAssets, pagination, page.getTotalElements());
 	}
 }
