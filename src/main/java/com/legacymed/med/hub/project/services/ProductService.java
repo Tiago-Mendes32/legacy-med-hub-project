@@ -1,11 +1,13 @@
 package com.legacymed.med.hub.project.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.legacymed.med.hub.project.entities.product.Product;
+import com.legacymed.med.hub.project.entities.status.Status;
 import com.legacymed.med.hub.project.repositories.ProductRepository;
 
 @Service
@@ -46,5 +48,14 @@ public class ProductService {
 		insert(prodUpdated);
 		
 		return prodUpdated;
+	}
+
+	public Object listAllAssets() {
+		List<Product> list = repository.findAll();
+		List<Product> listAssets = new ArrayList<>();
+		for(Product x : list) {
+			if(x.getStatus() == Status.Active) {listAssets.add(x);}
+		}
+		return null;
 	}
 }

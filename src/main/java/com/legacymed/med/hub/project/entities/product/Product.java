@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import com.legacymed.med.hub.project.entities.category.Category;
 import com.legacymed.med.hub.project.entities.product.DTO.NewProductDTO;
+import com.legacymed.med.hub.project.entities.status.Status;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,6 +31,8 @@ public class Product implements Serializable{
 	@ManyToOne
 	private Category category;
 	
+	private Status status;
+	
 	public Product() {
 	}
 
@@ -40,6 +43,7 @@ public class Product implements Serializable{
 		this.quantity = quantity;
 		this.ean = ean;
 		this.category = category;
+		this.status = Status.Active;
 	}
 	
 	public Product(NewProductDTO prodDTO) {
@@ -108,6 +112,14 @@ public class Product implements Serializable{
 		this.category = category;
 	}
 	
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
