@@ -36,7 +36,7 @@ public class ProductController {
 	
 	@GetMapping
 	public ResponseEntity<Page<ListProductsDTO>> listAllActiveProducts(@PageableDefault(size = 10) Pageable pagination){
-	    Page<Product> page = service.listAllAssets(pagination);
+	    Page<Product> page = service.listAll(pagination);
 	    Page<ListProductsDTO> dtoPage = page.map(ListProductsDTO::new);
 	    return ResponseEntity.ok(dtoPage);
 	}

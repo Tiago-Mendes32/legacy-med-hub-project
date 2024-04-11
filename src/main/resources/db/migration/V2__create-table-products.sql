@@ -7,7 +7,6 @@ CREATE TABLE products (
     ean VARCHAR(13),
     category_id BIGINT,
     manufacturer VARCHAR(30),
-    status TINYINT,
     PRIMARY KEY (id),
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );

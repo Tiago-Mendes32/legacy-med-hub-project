@@ -33,9 +33,6 @@ public class Product implements Serializable{
 	@ManyToOne
 	private Category category;
 	
-	@Enumerated(EnumType.STRING)
-	private Status status;
-	
 	public Product() {
 	}
 
@@ -46,7 +43,6 @@ public class Product implements Serializable{
 		this.quantity = quantity;
 		this.ean = ean;
 		this.category = category;
-		this.status = Status.Active;
 	}
 	
 	public Product(NewProductDTO prodDTO) {
@@ -113,14 +109,6 @@ public class Product implements Serializable{
 
 	public void setCategory(Category category) {
 		this.category = category;
-	}
-	
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
 	}
 
 	@Override

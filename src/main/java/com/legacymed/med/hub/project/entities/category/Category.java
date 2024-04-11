@@ -31,16 +31,12 @@ public class Category implements Serializable{
 	@OneToMany(mappedBy = "category")
     private List<Product> products;
 	
-	@Enumerated(EnumType.STRING)
-	private Status status;
-	
 	public Category() {
 	}
 
 	public Category(String name, String code) {
 		this.name = name;
 		this.code = code;
-		this.status = Status.Active;
 	}
 
 	public Long getId() {
@@ -73,14 +69,6 @@ public class Category implements Serializable{
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
 	}
 
 	@Override
