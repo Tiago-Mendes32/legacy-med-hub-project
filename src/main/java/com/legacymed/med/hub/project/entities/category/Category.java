@@ -8,6 +8,8 @@ import com.legacymed.med.hub.project.entities.product.Product;
 import com.legacymed.med.hub.project.entities.status.Status;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,6 +31,7 @@ public class Category implements Serializable{
 	@OneToMany(mappedBy = "category")
     private List<Product> products;
 	
+	@Enumerated(EnumType.STRING)
 	private Status status;
 	
 	public Category() {

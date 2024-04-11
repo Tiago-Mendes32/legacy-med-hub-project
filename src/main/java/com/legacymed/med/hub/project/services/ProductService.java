@@ -57,7 +57,7 @@ public class ProductService {
 	    Page<Product> page = repository.findAll(pagination);
 	    List<Product> listAssets = new ArrayList<>();
 	    for (Product x : page.getContent()) {
-	        if (x.getStatus() == Status.Active) {
+	        if (x.getStatus().equals(Status.Active)) {
 	            listAssets.add(x);
 	        }
 	    }
