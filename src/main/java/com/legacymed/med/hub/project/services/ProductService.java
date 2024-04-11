@@ -1,7 +1,5 @@
 package com.legacymed.med.hub.project.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +26,7 @@ public class ProductService {
 		return repository.findAll(pagination);
 	}
 	
-	public void desative(Long id) {
+	public void delete(Long id) {
 		repository.deleteById(id);
 	}
 	
@@ -38,13 +36,24 @@ public class ProductService {
 
 	private Product updateData(Long id, Product product) {
 		Product prodUpdated = findById(id);
-		
+		if(product.getName() != null) {
 		prodUpdated.setName(product.getName());
+		}
+		if(product.getCode() != null) {
 		prodUpdated.setCode(product.getCode());
+		}
+		if(product.getPrice() != null) {
 		prodUpdated.setPrice(product.getPrice());
+		}
+		if(product.getQuantity() != null) {
 		prodUpdated.setQuantity(product.getQuantity());
+		}
+		if(product.getEan() != null) {
 		prodUpdated.setEan(product.getEan());
+		}
+		if(product.getCategory() != null) {
 		prodUpdated.setCategory(product.getCategory());
+		}
 		insert(prodUpdated);
 		
 		return prodUpdated;

@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import com.legacymed.med.hub.project.entities.category.Category;
 import com.legacymed.med.hub.project.entities.product.DTO.NewProductDTO;
+import com.legacymed.med.hub.project.entities.product.DTO.UpdateProductDTO;
 import com.legacymed.med.hub.project.entities.status.Status;
 
 import jakarta.persistence.Entity;
@@ -52,6 +53,15 @@ public class Product implements Serializable{
 		this.quantity = prodDTO.quantity();
 		this.ean = prodDTO.ean();
 		this.category = prodDTO.category();
+	}
+
+	public Product(UpdateProductDTO data) {
+		this.name = data.name();
+		this.code = data.code();
+		this.price = data.price();
+		this.quantity = data.quantity();
+		this.ean = data.ean();
+		this.category = data.category();
 	}
 
 	public Long getId() {
