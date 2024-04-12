@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.legacymed.med.hub.project.entities.category.DTO.NewCategoryDTO;
 import com.legacymed.med.hub.project.entities.category.DTO.UpdateCategoryDTO;
 import com.legacymed.med.hub.project.entities.product.Product;
@@ -30,7 +31,7 @@ public class Category implements Serializable{
 	private String name;
 	private String code;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "category")
     private List<Product> products;
 	

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.legacymed.med.hub.project.entities.product.Product;
+import com.legacymed.med.hub.project.entities.product.DTO.UpdateProductDTO;
 import com.legacymed.med.hub.project.repositories.ProductRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -15,6 +16,9 @@ public class ProductService {
 	
 	@Autowired
 	private ProductRepository repository;
+	
+	@Autowired
+	private CategoryService categoryService;
 	
 	public Product insert(Product product) {
 		return repository.save(product);
@@ -36,6 +40,17 @@ public class ProductService {
 		return updateData(id, product);
 	}
 
+	public Product convertUpdateDTO(UpdateProductDTO prodDTO) {
+		return new Product(
+				prodDTO.name(),
+				prodDTO.code(),
+				prodDTO.price(),
+				prodDTO.quantity(),
+				prodDTO.ean(),
+				categoryService.findById(prodDTO.category())
+				);
+	}
+	
 	private Product updateData(Long id, Product product) {
 		Product prodUpdated = findById(id);
 		if(product.getName() != null) {

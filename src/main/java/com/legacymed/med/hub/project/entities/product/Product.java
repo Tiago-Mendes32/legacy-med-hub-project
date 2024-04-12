@@ -55,15 +55,6 @@ public class Product implements Serializable{
 		this.category = prodDTO.category();
 	}
 
-	public Product(UpdateProductDTO data) {
-		this.name = data.name();
-		this.code = data.code();
-		this.price = data.price();
-		this.quantity = data.quantity();
-		this.ean = data.ean();
-		this.category = data.category();
-	}
-
 	public Long getId() {
 		return id;
 	}
