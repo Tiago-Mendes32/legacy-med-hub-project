@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.legacymed.med.hub.project.entities.product.Product;
 import com.legacymed.med.hub.project.repositories.ProductRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class ProductService {
 	
@@ -19,7 +21,7 @@ public class ProductService {
 	}
 	
 	public Product findById(Long id) {
-		return repository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+		return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Product not found: ID: " + id));
 	}
 	
 	public Page<Product> listAll(Pageable pagination){
