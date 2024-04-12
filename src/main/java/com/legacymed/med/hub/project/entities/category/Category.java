@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import com.legacymed.med.hub.project.entities.category.DTO.NewCategoryDTO;
+import com.legacymed.med.hub.project.entities.category.DTO.UpdateCategoryDTO;
 import com.legacymed.med.hub.project.entities.product.Product;
 import com.legacymed.med.hub.project.entities.status.Status;
 
@@ -15,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 
 @Entity(name = "category")
 @Table(name = "categories")
@@ -37,6 +40,16 @@ public class Category implements Serializable{
 	public Category(String name, String code) {
 		this.name = name;
 		this.code = code;
+	}
+
+	public Category(@Valid NewCategoryDTO categoryDTO) {
+		this.name = categoryDTO.name();
+		this.code = categoryDTO.code();
+	}
+
+	public Category(UpdateCategoryDTO data) {
+		this.name = data.name();
+		this.code = data.code();
 	}
 
 	public Long getId() {
