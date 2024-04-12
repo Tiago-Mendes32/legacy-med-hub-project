@@ -47,7 +47,7 @@ public class ProductService {
 				prodDTO.price(),
 				prodDTO.quantity(),
 				prodDTO.ean(),
-				categoryService.findById(prodDTO.category())
+				categoryService.findById(prodDTO.categoryId())
 				);
 	}
 	
