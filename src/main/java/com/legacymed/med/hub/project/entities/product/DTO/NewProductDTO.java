@@ -1,7 +1,5 @@
 package com.legacymed.med.hub.project.entities.product.DTO;
 
-import com.legacymed.med.hub.project.entities.category.Category;
-
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,7 +14,7 @@ public record NewProductDTO(
         @NotNull(message = "Quantity not be null")
         @Min(value = 1, message = "Quantity should not be less than 1")
         Integer quantity,
-        Category category,
+        Long categoryId,
         Long ean
 ) {
 }

@@ -33,7 +33,7 @@ public class ProductController {
 	
 	@PostMapping
 	public ResponseEntity<ProductDetailsDTO> insertProduct(@RequestBody @Valid NewProductDTO productDTO, UriComponentsBuilder uriBuilder) {
-		Product product = service.insert(new Product(productDTO));
+		Product product = service.insertFromDTO(productDTO);
 		var uri = uriBuilder.path("/products/{id}").buildAndExpand(product.getId()).toUri();
 		return ResponseEntity.created(uri).body(new ProductDetailsDTO(product));
 	}

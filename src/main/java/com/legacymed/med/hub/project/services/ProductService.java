@@ -5,11 +5,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.legacymed.med.hub.project.entities.category.Category;
 import com.legacymed.med.hub.project.entities.product.Product;
+import com.legacymed.med.hub.project.entities.product.DTO.NewProductDTO;
 import com.legacymed.med.hub.project.entities.product.DTO.UpdateProductDTO;
 import com.legacymed.med.hub.project.repositories.ProductRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 
 @Service
 public class ProductService {
@@ -20,7 +23,13 @@ public class ProductService {
 	@Autowired
 	private CategoryService categoryService;
 	
-	public Product insert(Product product) {
+	private void insert(Product product) {
+		repository.save(product);
+	}
+	
+	public Product insertFromDTO(@Valid NewProductDTO productDTO) {
+		Category category = categoryService.findById(productDTO.categoryId());
+		Product product = new Product(productDTO.name(), productDTO.code(), productDTO.price(), productDTO.quantity(), productDTO.ean(), category);
 		return repository.save(product);
 	}
 	

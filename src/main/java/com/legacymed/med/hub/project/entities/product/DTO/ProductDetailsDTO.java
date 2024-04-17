@@ -8,8 +8,8 @@ public record ProductDetailsDTO(
 		String code, 
 		Double price, 
 		Integer quantity,
-		Category category,
-		Long ean
+		Long ean,
+		Category category
 		) {
 
 	public ProductDetailsDTO(Product product) {
@@ -17,8 +17,9 @@ public record ProductDetailsDTO(
 			product.getName(), 
 			product.getCode(), 
 			product.getPrice(), 
-			product.getQuantity(), 
-			product.getCategory(), 
-			product.getEan());
+			product.getQuantity(),
+			product.getEan(),
+			product.getCategory()
+				);
 	}
 }
