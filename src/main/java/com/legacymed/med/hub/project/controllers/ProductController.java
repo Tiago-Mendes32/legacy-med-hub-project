@@ -22,6 +22,7 @@ import com.legacymed.med.hub.project.entities.product.DTO.ProductDetailsDTO;
 import com.legacymed.med.hub.project.entities.product.DTO.UpdateProductDTO;
 import com.legacymed.med.hub.project.services.ProductService;
 
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
@@ -32,6 +33,7 @@ public class ProductController {
 	ProductService service;
 	
 	@PostMapping
+	@Transactional
 	public ResponseEntity<ProductDetailsDTO> insertProduct(@RequestBody @Valid NewProductDTO productDTO, UriComponentsBuilder uriBuilder) {
 		Product product = service.insertFromDTO(productDTO);
 		var uri = uriBuilder.path("/products/{id}").buildAndExpand(product.getId()).toUri();
@@ -51,13 +53,22 @@ public class ProductController {
 	}
 	
 	@PutMapping("/{id}")
+	@Transactional
 	public ResponseEntity<ProductDetailsDTO> update(@PathVariable Long id, @RequestBody UpdateProductDTO data){
 		return ResponseEntity.ok(new ProductDetailsDTO(service.update(id, service.convertUpdateDTO(data))));
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
-		service.delete(id);
+	@Transactional
+	public ResponseEntity<Void> deleteById(@PathVariable Long id){
+		service.deleteById(id);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@DeleteMapping("/code/{code}")
+	@Transactional
+	public ResponseEntity<Void> deleteByCode(@PathVariable String code){
+		service.deleteByCode(code);
 		return ResponseEntity.noContent().build();
 	}
 }

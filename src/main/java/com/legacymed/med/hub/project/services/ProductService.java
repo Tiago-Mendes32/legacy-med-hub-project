@@ -41,8 +41,13 @@ public class ProductService {
 		return repository.findAll(pagination);
 	}
 	
-	public void delete(Long id) {
+	public void deleteById(Long id) {
 		repository.deleteById(id);
+	}
+	
+	public void deleteByCode(String code) {
+		repository.deleteByCode(code);
+		
 	}
 	
 	public Product update(Long id, Product product) {

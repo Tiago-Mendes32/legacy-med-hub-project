@@ -8,4 +8,5 @@ import com.legacymed.med.hub.project.entities.product.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long>{
 
+	void deleteByCode(String code);
 }
